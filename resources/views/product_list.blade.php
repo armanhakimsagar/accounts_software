@@ -16,7 +16,6 @@
                                 <tr>
                                   <th scope="col">Chalan no</th>
                                   <th scope="col">Product name</th>
-                                  <th scope="col">Product description</th>
                                   <th scope="col">Qc ok</th>
                                   <th scope="col">Qc out</th>
                                   <th scope="col">Buy rate</th>
@@ -25,36 +24,17 @@
                               </tr>
                           </thead>
                           <tbody>
+                            @foreach($products as $product)
                             <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                              <td>100</td>
-                              <td>90</td>
-                              <td>90</td>
-                              <td>90</td>
-                          </tr>
-                          <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                              <td>100</td>
-                              <td>90</td>
-                              <td>90</td>
-                              <td>90</td>
-                          </tr>
-                          <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                              <td>100</td>
-                              <td>90</td>
-                              <td>90</td>
-                              <td>90</td>
-                          </tr>
+                              <th scope="row">{{ $product->chalan }}</th>
+                              <td>{{ $product->product_name }}</td>
+                              <td>{{ $product->qc_out }}</td>
+                              <td>{{ $product->qc_out }}</td>
+                              <td>{{ $product->buy_rate }}</td>
+                              <td>{{ $product->seller_rate }}</td>
+                              <td>{{ $product->seller_rate }}</td>
+                            </tr>
+                            @endforeach
                       </tbody>
                   </table>
                         </div>
