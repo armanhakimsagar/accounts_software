@@ -11,21 +11,11 @@ Route::get('/add_client', function () {
     return view('add_client');
 });
 
+Route::get('/buyer_transaction','BuyertransactionController@index');
 
-Route::get('/buyer_all_details', function () {
-    return view('buyer_all_details');
-});
+Route::get('/seller_transaction','SellerTransactionController@index');
 
-
-Route::get('/buyer_transaction', function () {
-    return view('buyer_transaction');
-});
-
-
-Route::get('/add_product', function () {
-    return view('add_product');
-});
-
+Route::get('/add_product','ProductsController@index');
 
 Route::post('add_product','ProductsController@add_product');
 
@@ -56,11 +46,7 @@ Route::get('/search', function () {
 Route::post('/search_post','SearchController@search');
 
 
-Route::get('/seller_all_details', function () {
-    return view('seller_all_details');
-});
+Route::get('/seller_all_details','SellerTransactionController@seller_all_details');
 
+Route::get('/buyer_all_details','BuyertransactionController@buyer_all_details');
 
-Route::get('/seller_transaction', function () {
-    return view('seller_transaction');
-});

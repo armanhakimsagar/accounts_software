@@ -52,7 +52,7 @@
 
 
 
-              <form action="{{ url('add_product') }}" method="post" class="form-horizontal">
+              <form action="{{ url('add_product') }}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{ csrf_field() }}
                       <div class="card-header">
                          <strong>Add Product</strong>
@@ -83,8 +83,10 @@
                             <div class="col col-sm-5"><label for="input-large" class=" form-control-label">Product buyer </label></div>
                             <div class="col col-sm-6">
                             <select class="form-control" name="product_buyer">
-                                <option value="0">Select Buyer</option>               
-                                <option value="1">Mr abc</option>
+                                <option value="0">Select Buyer</option>  
+                                @foreach($buyers as $buyer)             
+                                <option value="{{ $buyer->id }}">{{ $buyer->name }}</option>
+                                @endforeach
                             </select></div>
                           </div>
                           <div class="row form-group">
@@ -92,7 +94,9 @@
                             <div class="col col-sm-6">
                               <select class="form-control" name="product_seller">
                                 <option value="0">Select Seller</option>               
-                                <option value="1">Mr abc</option>
+                                @foreach($sellers as $seller)             
+                                <option value="{{ $seller->id }}">{{ $seller->name }}</option>
+                                @endforeach
                             </select></div>
                           </div>
                           <div class="row form-group">
@@ -101,12 +105,12 @@
                           </div>
 						  <div class="row form-group">
                             <div class="col col-sm-5"><label for="input-large" class=" form-control-label">QC out</label></div>
-                            <div class="col col-sm-6"><input type="text" id="input-large" placeholder="QC out" name="qc_out" class="form-control"></div>
+                            <div class="col col-sm-6"><input type="number" id="input-large" placeholder="QC out" name="qc_out" class="form-control"></div>
                           </div>
-							  
-                          <div class="row form-group">
-                            <div class="col col-sm-5"><label for="input-large" class=" form-control-label">Liquid cash</label></div>
-                            <div class="col col-sm-6"><input readonly type="text" id="input-large" name="liquid_cash" class="form-control"></div>
+							         
+                        <div class="row form-group">
+                            <div class="col col-sm-5"><label for="input-large" class=" form-control-label">Picture</label></div>
+                            <div class="col col-sm-6"><input type="file" id="input-large" placeholder="QC out" name="picture" class="form-control"></div>
                           </div>
                         
                       </div>

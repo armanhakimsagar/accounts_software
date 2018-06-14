@@ -8,6 +8,10 @@ use App\product;
 
 use App\investment;
 
+use App\seller;
+
+use App\buyer;
+
 use Session;
 
 use DB;
@@ -17,20 +21,28 @@ use Validator;
 
 class ProductsController extends Controller
 {
+    public function index(){
+
+        $sellers    =   seller::all();
+        $buyers     =   buyer::all();
+
+        return view('add_product',compact('sellers','buyers'));
+
+    }
+    
     public function add_product(Request $request){
 
 
     	$validator = Validator::make($request->all(), [
                 
             'date'           			=> 'required',
-            'chalan'					=> 'required|integer',
+            'chalan'					=> 'required',
             'product_name'				=> 'required',
             'quantity'					=> 'required|integer',
             'buy_rate'					=> 'required|integer',
             'product_buyer'				=> 'required|integer',
             'product_seller'			=> 'required|integer',
-            'sale_rate'					=> 'required|integer',
-            'qc_out'					=> 'required|integer',
+            'sale_rate'					=> 'required|integer'
                 
         ]);
 
@@ -55,20 +67,21 @@ class ProductsController extends Controller
 
                 $sale_rate 						= $qty * $request->sale_rate ; 
                 $buy_rate						= $qty * $request->buy_rate;
+
+                $product->total_sell            = $sale_rate;
                 $profit 						= $sale_rate - $buy_rate;
                 $product->profit        		= $profit;
 
+                if($request->picture != ""){
+                    
+                    $cover_image                = $request->file('picture');
+                    $enc_cover_image            = time() . '.' . $cover_image->getClientOriginalExtension();
+                    $destinationPath            = public_path('img');
+                    $cover_image->move($destinationPath, $enc_cover_image);
+                    $product->picture           = $enc_cover_image;
+                }
+
                 $product->save();
-
-
-                $total_invest = DB::table('investments')->sum('total_invest');
-                $new_investment = $profit + $total_invest;
-                investment::where('id',5)->update(array(
-
-                    'total_invest'      =>      $new_investment,
-
-                ));
-
                 
                 Session::flash('product', 'Inserted Successfully!'); 
                 return redirect('add_product');
@@ -80,7 +93,7 @@ class ProductsController extends Controller
 
     public function product_list(){
 
-    	$products = product::all();
+    	$products = product::orderBy('id', 'DESC')->get();
     	return view('product_list',compact('products'));
 
     }

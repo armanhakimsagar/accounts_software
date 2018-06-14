@@ -15,29 +15,30 @@
 							  <tr>
 								<th>Chalan no</th>
 								<th>Paid amount</th>
-								<th>Due amount</th>
 								<th>Client name</th>
+								<th>Date</th>
+								<th>Due</th>
 							  </tr>
 							</thead>
 							<tbody>
+								
+							  @foreach($seller_transactions as $seller_transaction)
 							  <tr>
-								<td>123424</td>
-								<td>100</td>
-								<td>20</td>
-								  <td>john</td>
-							  </tr>
-							  <tr>
-								<td>123424</td>
-								<td>100</td>
-								<td>20</td>
-								  <td>john</td>
-							  </tr>
-							  <tr>
-								<td>123424</td>
-								<td>100</td>
-								<td>20</td>
-								  <td>john</td>
-							  </tr>
+						  		<td> {{ $seller_transaction->product_id }} </td>
+						  		<td> {{ $seller_transaction->paid }} </td>
+						  		<td> {{ $seller_transaction->client_id }} </td>
+						  		<td> {{ $seller_transaction->created_at }} </td>
+						  		@if($seller_transaction->status == 0)
+					  			<td>  
+
+					  				Due have
+					  			</td>
+						  		@else
+						  			<td> Full Paid  In This Chalan</td>
+						  		@endif
+						  	  </tr>
+						  	 @endforeach
+								
 							</tbody>
 						  </table>
 						  

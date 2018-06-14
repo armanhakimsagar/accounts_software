@@ -25,7 +25,7 @@ class InvestmentController extends Controller
         $loan = DB::table('loans')->sum('total_loan');
         $cost = DB::table('costs')->sum('total_cost');
 
-        $liquid_cash = $invest - $cost - $loan;
+        $liquid_cash = $invest + $buyer - $seller - $cost - $loan;
 
         return view('investment',compact('invest','loan','cost','liquid_cash','buyer','seller'));
 
@@ -50,17 +50,10 @@ class InvestmentController extends Controller
                 $investment->save();
 
                 $total_invest               = DB::table('investments')->sum('amount');
-                $profit                     = DB::table('products')->sum('profit');
-
-                $new_investment = $profit + $total_invest;
 
                 investment::where('id',5)->update(array(
-                         'total_invest'=>$new_investment,
+                         'total_invest'     =>$total_invest,
                 ));
-
-
-
-                
 
                 Session::flash('investment', 'Inserted Successfully!'); 
                 return redirect('investment');

@@ -36,7 +36,9 @@
                             <div class="col col-sm-6">
 								<select name="client_list" class="input-sm form-control-sm form-control">
                   <option value="1">Select Client</option>
-                  <option value="2">hello</option>
+                  @foreach($sellers as $seller)             
+                                <option value="{{ $seller->name }}">{{ $seller->name }}</option>
+                                @endforeach
                 </select>
 							</div>
                           </div>
@@ -45,8 +47,10 @@
                             <div class="col col-sm-6"><label for="input-small" class=" form-control-label">Select Product</label></div>
                             <div class="col col-sm-6">
 								<select name="product_list" class="input-sm form-control-sm form-control">
-                  <option value="1">Select Product</option>
-                  <option value="2">hello</option>
+                  <option value="1">Select Chalan</option>
+                  @foreach($products as $product)             
+                                <option value="{{ $product->chalan }}">{{ $product->chalan }}</option>
+                                @endforeach
                 </select>
 							</div>
                           </div>
